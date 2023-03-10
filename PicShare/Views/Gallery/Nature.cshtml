@@ -1,0 +1,50 @@
+﻿@model PhotographyViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+@using System.Security.Claims;
+
+
+<div class="col-12">
+    <h1>Nature</h1>
+    <h6>Here is a list of all of the pictures from Nature category</h6>
+    <div class="card card-primary">
+        <div class="card-body">
+            <br />
+            <div class="row">
+                @if (Model.photoGraphyList != null)
+                {
+                    foreach (var item in Model.photoGraphyList)
+                    {
+                        if (item.Category == "1")
+                        {
+                <div class="col-sm-2">
+                    <a href="@Url.Content("~/photography/" + item.Name)" data-toggle="lightbox" data-title="@item.Title" data-gallery="gallery">
+                        <img src="~/photography/@item.Name" asp-append-version="true" class="img-fluid mb-2" alt="white sample">
+                    </a>
+                    @if (User.FindFirstValue(ClaimTypes.NameIdentifier) == "b4c471d6-db5f-44a9-9359-0d7eca9b2c1d")
+                    {
+                        <a href="@Url.Action("DeletePhoto", "gallery", new { id = item.Id })" style="float:right">Delete</a>
+                    }
+                </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+        });
+    </script>
+}

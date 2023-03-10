@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PicShare</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/Content/all.min.css" rel="stylesheet" />
+    <link href="~/Content/ekko-lightbox.css" rel="stylesheet" />
+    <link href="~/Content/adminlte.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-4.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="d-sm-inline-flex text-primary">
+                        <div class="login-form-icon">
+                            <i class="mr-2 fas fa-camera-retro fa-lg"></i>
+                        </div>
+                        PicShare
+                    </div>
+                </a>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    <partial name="_LoginPartial.cshtml" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mb-5">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted" style="background-color:#fff;position:fixed">
+        <div class="container">
+            &copy; 2022 - PicShare - Krystian Domagała
+        </div>
+    </footer>
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/ekko-lightbox.min.js"></script>
+    <script src="~/Scripts/adminlte.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1 class="mt-5">
+    Categories
+</h1>
+<h6>Choose the category of picture your are interested in</h6>
+
+<div class="card card-primary">
+    <div class="card-body">
+
+        <div class="row">
+            <a asp-controller="Gallery" asp-action="Nature" class="col btn btn-primary m-2 py-4">
+                Nature
+            </a>
+            <a asp-controller="Gallery" asp-action="Food" class="col btn btn-primary m-2 py-4">
+                Food
+            </a>
+        </div>
+        <div class="row">
+            <a asp-controller="Gallery" asp-action="Buildings" class="col btn btn-primary m-2 py-4">
+                Buildings
+            </a>
+            <a asp-controller="Gallery" asp-action="People"  class="col btn btn-primary m-2 py-4">
+                People
+            </a>
+        </div>
+        <div class="row">
+            <a asp-controller="Gallery" asp-action="StillLife" class="col btn btn-primary m-2 py-4">
+                Still life
+            </a>
+            <a asp-controller="Gallery" asp-action="Art" class="col btn btn-primary m-2 py-4">
+                Art
+            </a>
+        </div>
+    </div>
+</div>

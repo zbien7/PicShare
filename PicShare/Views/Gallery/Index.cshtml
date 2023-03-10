@@ -1,0 +1,87 @@
+﻿@model PhotographyViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+@using System.Security.Claims;
+
+
+<div class="col-12">
+    <h1>My Pictures</h1>
+    <h6>Here is a list of all of the pictures you shared</h6>
+
+    <div class="card card-primary">
+        <div class="card-body">
+
+            <form id="frmPhototGraphy" class="form-horizontal" asp-action="AddPhotos" asp-controller="gallery" method="post" enctype="multipart/form-data">
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <label for="@Model.photoGraphy.Category">Category</label>
+                        <select class="form-control" id="Category" asp-for="@Model.photoGraphy.Category">
+                            <option value="1">Nature</option>
+                            <option value="2">Food</option>
+                            <option value="3">Buildings</option>
+                            <option value="4">People</option>
+                            <option value="5">Still life</option>
+                            <option value="6">Art</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Photo</label>
+
+                        <div class="col-sm-6 custom-file">
+
+                            <input asp-for="@Model.photoGraphy.filePhoto" type="file" class="custom-file-input">
+                            <label class="custom-file-label" for="@Model.photoGraphy.filePhoto">Choose file</label>
+                            <span asp-validation-for="@Model.photoGraphy.filePhoto" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-sm-4"> <button type="submit" class="btn btn-danger">Upload</button></div>
+                    </div>
+
+
+
+                </div>
+            </form>
+            <br />
+            <div class="row">
+                @if (Model.photoGraphyList != null)
+                {
+                    foreach (var item in Model.photoGraphyList)
+                    {
+                        if (item.ApplicationUserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                        {
+                            <div class="col-sm-2">
+                                <a href="@Url.Content("~/photography/" + item.Name)" data-toggle="lightbox" data-title="@item.Title" data-gallery="gallery">
+                                    <img src="~/photography/@item.Name" asp-append-version="true" class="img-fluid mb-2" alt="white sample">
+                                </a>
+                                <a href="@Url.Action("DeletePhoto", "gallery", new { id = item.Id })" style="float:right">Delete</a>
+                            </div>
+                        }
+                    }
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+        });
+
+
+    </script>
+}

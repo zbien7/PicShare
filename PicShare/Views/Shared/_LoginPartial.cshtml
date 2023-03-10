@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PicShare.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-primary" asp-controller="Home" asp-action="Index">
+                Home
+            </a>
+        </li>
+        <li class="border-right border-primary mr-2 ml-2"></li>
+
+
+        <li class="nav-item">
+            <a class="nav-link text-primary" asp-controller="Gallery" asp-action="AllPhotos">
+                All photos
+            </a>
+        </li>
+        <li class="border-right border-primary mr-2 ml-2"></li>
+
+        <li class="nav-item">
+            <a class="nav-link text-primary" asp-controller="Gallery" asp-action="Categories">
+                Categories
+            </a>
+        </li>
+        <li class="border-right border-primary mr-2 ml-2"></li>
+
+        <li class="nav-item text-primary">
+            <a class="nav-link text-primary" asp-controller="Gallery" asp-action="Index">
+                My Pictures
+            </a>
+        </li>
+        <li class="border-right border-primary mr-2 ml-2"></li>
+
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                <div class="d-sm-inline-flex text-hover">
+                    <div class="login-form-icon">
+                        <i class="mr-2 fas fa-user-circle fa-lg"></i>
+                    </div>
+                    @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName
+
+                </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="ml-2 btn btn-outline-primary">Logout</button>
+            </form>
+        </li>
+    }
+
+</ul>
